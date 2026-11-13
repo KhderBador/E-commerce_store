@@ -1,0 +1,60 @@
+<?php
+
+namespace App\Policies;
+
+use App\Models\ProductImage;
+use App\Models\User;
+use Illuminate\Auth\Access\Response;
+
+class ProductImagePolicy
+{
+    /**
+     * Determine whether the user can view any models.
+     */
+    public function viewAny(User $user): bool
+    {
+        return false;
+    }
+
+    /**
+     * Determine whether the user can view the model.
+     */
+    public function view(User $user, ProductImage $productImage): bool
+    {
+        return false;
+    }
+
+    /**
+     * Determine whether the user can create models.
+     */
+   public function create(User $user): bool
+{
+    return $user->role === 'admin';
+}
+
+public function update(User $user, ProductImage $image): bool
+{
+    return $user->role === 'admin';
+}
+
+public function delete(User $user, ProductImage $image): bool
+{
+    return $user->role === 'admin';
+}
+
+    /**
+     * Determine whether the user can restore the model.
+     */
+    public function restore(User $user, ProductImage $productImage): bool
+    {
+        return false;
+    }
+
+    /**
+     * Determine whether the user can permanently delete the model.
+     */
+    public function forceDelete(User $user, ProductImage $productImage): bool
+    {
+        return false;
+    }
+}
